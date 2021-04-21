@@ -1,20 +1,12 @@
-import React from 'react';
-import logo from './assets/images/logo.svg';
+import React, { useState } from 'react';
+import CardGrid from './components/CardGrid';
 import './assets/css/App.css';
 
 function App() {
+  const [users] = useState([]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit
-          <code>
-            src/App.js
-          </code>
-          and save to reload.
-        </p>
-      </header>
+      <CardGrid users={users} />
     </div>
   );
 }
