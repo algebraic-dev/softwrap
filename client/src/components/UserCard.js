@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import DateUtil from '../utils/Date';
 
-// TODO: Add little right margin between the button and the link
-// and make the link and button a little more intuitive.
+import { ModalContext } from '../contexts/ModalContext';
+
 function UserCard({ user }) {
+  const [, setState] = useContext(ModalContext);
   return (
     <Card className="smooth-shadow p-3 mx-auto mb-5 bg-white rounded" style={{ width: '17rem', border: 'none' }}>
       <Card.Body>
@@ -24,8 +25,8 @@ function UserCard({ user }) {
           Cidade-Estado:
           {user.city_state}
         </Card.Text>
-        <div style={{ 'text-align': 'center' }}>
-          <Button variant="primary" className="mr-4">Editar</Button>
+        <div style={{ textAlign: 'center' }}>
+          <Button variant="primary" onClick={() => setState({ show: true, id: user.id })} className="mr-4">Editar</Button>
           <Card.Link href="#">Remover</Card.Link>
         </div>
       </Card.Body>
