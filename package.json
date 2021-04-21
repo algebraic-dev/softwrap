@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "A website for registering people",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:client": "yarn --cwd client run start",
+    "start:server": "yarn --cwd server run start",
+    "test:server": "cd server && yarn test"
 
   },
   "author": "Felipe G.",
