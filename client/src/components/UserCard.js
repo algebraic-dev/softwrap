@@ -8,7 +8,7 @@ import DateUtil from '../utils/Date';
 // and make the link and button a little more intuitive.
 function UserCard({ user }) {
   return (
-    <Card class="shadow-large p-3 mb-5 bg-white rounded" style={{ width: '15rem', textAlign: 'center' }}>
+    <Card className="shadow-large p-3 mb-5 bg-white rounded" style={{ width: '15rem', textAlign: 'center' }}>
       <Card.Body>
         <Card.Title>Lorem ipsum dolor sit a met</Card.Title>
         <Card.Text>
