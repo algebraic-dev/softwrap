@@ -1,0 +1,11 @@
+{
+  "name": "softwrap",
+  "version": "0.0.1",
+  "description": "A website for registering people",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+
+  },
+  "author": "Felipe G.",
+  "license": "MIT"
+}
