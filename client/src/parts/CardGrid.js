@@ -6,7 +6,7 @@ import UserCard from '../components/UserCard';
 
 function CardGrid({ users }) {
   return (
-    <Row>
+    <Row className="mx-auto">
       {
         users.map((user) => (
           <Col key={user.id}>

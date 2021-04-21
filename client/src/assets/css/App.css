@@ -5,7 +5,6 @@
 
 .smooth-shadow{
   box-shadow:
-  0 2.8px 2.2px rgba(0, 0, 0, 0.014),
-  0 22.3px 17.9px rgba(0, 0, 0, 0.012),
-  0 41.8px 33.4px rgba(0, 0, 0, 0.016);
+  0 22.3px 17.9px rgba(0, 0, 0, 0.022),
+  0 41.8px 33.4px rgba(0, 0, 0, 0.026)
 }

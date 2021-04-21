@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 
 function Header() {
   return (
-    <Navbar style={{ background: 'white' }} className="smooth-shadow mx-auto">
+    <Navbar style={{ background: 'white' }} className="shadow-sm mx-auto">
       <Nav className="mx-auto">
         <Navbar.Brand href="#home">SoftUsers</Navbar.Brand>
       </Nav>
