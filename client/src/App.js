@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import CardGrid from './components/CardGrid';
+import CardGrid from './parts/CardGrid';
 import './assets/css/App.css';
 
 function App() {
