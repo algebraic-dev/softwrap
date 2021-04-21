@@ -4,8 +4,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import UserCard from '../components/UserCard';
 
-// TODO: Add little right margin between the button and the link
-// and make the link and button a little more intuitive.
 function CardGrid({ users }) {
   return (
     <Row>
