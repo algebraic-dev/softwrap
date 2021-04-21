@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import UserCard from './UserCard';
+import UserCard from '../components/UserCard';
 
 // TODO: Add little right margin between the button and the link
 // and make the link and button a little more intuitive.
