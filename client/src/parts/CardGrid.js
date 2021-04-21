@@ -3,18 +3,22 @@ import PropTypes from 'prop-types';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import UserCard from '../components/UserCard';
+import GridHeader from '../components/GridHeader';
 
 function CardGrid({ users }) {
   return (
-    <Row className="mx-auto">
-      {
-        users.map((user) => (
-          <Col key={user.id}>
-            <UserCard key={user.id} user={user} />
-          </Col>
-        ))
-      }
-    </Row>
+    <>
+      <GridHeader />
+      <Row className="mx-auto">
+        {
+          users.map((user) => (
+            <Col key={user.id}>
+              <UserCard key={user.id} user={user} />
+            </Col>
+          ))
+        }
+      </Row>
+    </>
   );
 }
 
