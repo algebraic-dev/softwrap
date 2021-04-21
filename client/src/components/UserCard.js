@@ -8,7 +8,7 @@ import DateUtil from '../utils/Date';
 // and make the link and button a little more intuitive.
 function UserCard({ user }) {
   return (
-    <Card className="smooth-shadow p-3 mx-auto mt-5 bg-white rounded" style={{ width: '15rem', border: 'none' }}>
+    <Card className="smooth-shadow p-3 mx-auto mb-5 bg-white rounded" style={{ width: '17rem', border: 'none' }}>
       <Card.Body>
         <Card.Title>Lorem ipsum dolor sit a met</Card.Title>
         <Card.Text>
@@ -24,8 +24,10 @@ function UserCard({ user }) {
           Cidade-Estado:
           {user.city_state}
         </Card.Text>
-        <Button variant="primary">Editar</Button>
-        <Card.Link href="#">Remover</Card.Link>
+        <div style={{ 'text-align': 'center' }}>
+          <Button variant="primary" className="mr-4">Editar</Button>
+          <Card.Link href="#">Remover</Card.Link>
+        </div>
       </Card.Body>
     </Card>
   );
