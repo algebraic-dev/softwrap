@@ -13,7 +13,7 @@ function UserEditModal() {
   const submitAndClose = async (e) => {
     e.preventDefault();
     let res = await fetch({
-      url: 'localhost:4040/user',
+      url: `localhost:4040/user/${state.user.id}`,
       method: 'PUT',
       body: JSON.stringify(state.user),
     });

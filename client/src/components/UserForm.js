@@ -32,7 +32,7 @@ function UserForm({
       <Form.Control required type="text" placeholder="Fullname" value={user.fullname} onChange={setUserProp('fullname')} />
       <br />
       <Form.Group controlId="exampleForm.SelectCustom">
-        <Form.Label>Custom select</Form.Label>
+        <Form.Label>Civil State</Form.Label>
         <Form.Control required value={user.civil_state} onChange={setUserProp('civil_state')} as="select" custom>
           <option>Solteiro(a)</option>
           <option>Casado(a)</option>
