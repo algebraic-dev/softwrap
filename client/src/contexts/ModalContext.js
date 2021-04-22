@@ -5,7 +5,7 @@ export const ModalContext = createContext();
 
 function reducer(state, data) {
   if (data.action === 'show') {
-    return { show: true, user: data.user ? data.user : {} };
+    return { show: true, user: data.user };
   }
   if (data.action === 'hide') {
     return { show: false, user: {} };

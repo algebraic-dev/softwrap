@@ -1,12 +1,11 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
 
 export const UserContext = createContext();
 
 function reducer(state, data) {
   if (data.action === 'add') {
-    state.push(data.user);
-    return state;
+    return [data.user, ...state];
   }
   if (data.action === 'update') {
     const index = state.findIndex((user) => user.id === data.id);
@@ -15,22 +14,36 @@ function reducer(state, data) {
     return newState;
   }
   if (data.action === 'remove') {
-    return data.filter((user) => user.id !== data.id);
+    return state.filter((user) => user.id !== data.id);
+  }
+  if (data.action === 'set') {
+    return data.users;
   }
   return state;
 }
 
 async function getPage() {
-  let res = await fetch('localhost:4040/user/search');
+  let res = await fetch('http://localhost:4040/user/search/0', {
+    mode: 'cors',
+    method: 'GET',
+  });
   res = await res.json();
-  return res;
+  return res.map((user) => {
+    const newUser = user;
+    newUser.birthday = new Date(user.birthday);
+    return newUser;
+  });
 }
 
 export function UserProvider({ children }) {
-  const state = useReducer(reducer, getPage());
+  const [state, setState] = useReducer(reducer, []);
+
+  useEffect(() => {
+    getPage().then((res) => setState({ action: 'set', users: res }));
+  }, []);
 
   return (
-    <UserContext.Provider value={state}>
+    <UserContext.Provider value={[state, setState]}>
       {children}
     </UserContext.Provider>
   );

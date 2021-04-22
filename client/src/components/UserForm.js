@@ -34,11 +34,11 @@ function UserForm({
       <Form.Group controlId="exampleForm.SelectCustom">
         <Form.Label>Civil State</Form.Label>
         <Form.Control required value={user.civil_state} onChange={setUserProp('civil_state')} as="select" custom>
-          <option>Solteiro(a)</option>
-          <option>Casado(a)</option>
-          <option>Divorciado(a)</option>
-          <option>Viúvo(a)</option>
-          <option>Separado(a)</option>
+          <option value={0}>Solteiro(a)</option>
+          <option value={1}>Casado(a)</option>
+          <option value={2}>Divorciado(a)</option>
+          <option value={3}>Viúvo(a)</option>
+          <option value={4}>Separado(a)</option>
         </Form.Control>
       </Form.Group>
       <Form.Label>CPF</Form.Label>

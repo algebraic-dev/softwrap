@@ -6,13 +6,13 @@ import UserForm from './UserForm';
 import { UserContext } from '../contexts/UserContext';
 
 function reducer(state, data) {
-  if (state.action === 'change') {
+  if (data.action === 'change') {
     const newState = state;
     newState[data.key] = data.value;
     return state;
   }
-  if (state.action === 'clear') {
-    return {};
+  if (data.action === 'clear') {
+    return { civil_state: '0' };
   }
   return state;
 }
@@ -20,17 +20,21 @@ function reducer(state, data) {
 function UserAddModal({ state, setState }) {
   const [, setUsers] = useContext(UserContext);
   const handleClose = () => setState(false);
-  const [user, setProp] = useReducer(reducer, {});
+  const [user, setProp] = useReducer(reducer, { civil_state: '0' });
   const setUser = (key, value) => setProp({ key, value, action: 'change' });
 
   const submitAndClose = async (e) => {
     e.preventDefault();
-    let res = await fetch({
-      url: 'localhost:4040/user',
+    let res = await fetch('http://localhost:4040/user/new', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
       method: 'POST',
+      mode: 'cors',
       body: JSON.stringify(user),
     });
     res = await res.json();
+    res.birthday = new Date(res.birthday);
     setUsers({ action: 'add', user: res });
     setProp({ action: 'clear' });
     handleClose();

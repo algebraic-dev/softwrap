@@ -5,22 +5,32 @@ import Button from 'react-bootstrap/Button';
 import DateUtil from '../utils/Date';
 
 import { ModalContext } from '../contexts/ModalContext';
+import { UserContext } from '../contexts/UserContext';
 
+const civilStates = ['Solteiro(a)', 'Casado(a)', 'Divorciado(a)', 'Viúvo(a)', 'Separado(a)'];
 function UserCard({ user }) {
+  const [, setUsers] = useContext(UserContext);
   const [, setState] = useContext(ModalContext);
+  async function deleteUser(id) {
+    await fetch(`http://localhost:4040/user/${id}`, {
+      method: 'DELETE',
+      mode: 'cors',
+    });
+    setUsers({ action: 'remove', id: user.id });
+  }
   const showModel = async () => {
-    setState({ action: 'show' });
+    setState({ action: 'show', user });
   };
   return (
     <Card className="smooth-shadow p-3 mx-auto mb-5 bg-white rounded" style={{ width: '17rem', border: 'none' }}>
       <Card.Body>
-        <Card.Title>Lorem ipsum dolor sit a met</Card.Title>
+        <Card.Title>{user.fullname}</Card.Title>
         <Card.Text>
           Idade:
           {DateUtil.calcAgeFromDate(user.birthday)}
           <br />
           Estado civil:
-          {user.civil_state}
+          {civilStates[user.civil_state]}
           <br />
           CPF:
           {user.cpf}
@@ -29,11 +39,11 @@ function UserCard({ user }) {
           {user.city}
           <br />
           Estado:
-          {user.city}
+          {user.state}
         </Card.Text>
         <div style={{ textAlign: 'center' }}>
           <Button variant="primary" onClick={showModel} className="mr-4">Editar</Button>
-          <Card.Link href="#">Remover</Card.Link>
+          <Card.Link style={{ cursor: 'pointer' }} onClick={() => deleteUser(user.id)}>Remover</Card.Link>
         </div>
       </Card.Body>
     </Card>

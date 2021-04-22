@@ -12,13 +12,19 @@ function UserEditModal() {
   const setUser = (key, value) => setState({ key, value, action: 'change' });
   const submitAndClose = async (e) => {
     e.preventDefault();
-    let res = await fetch({
-      url: `localhost:4040/user/${state.user.id}`,
+    console.log(state.user);
+    let res = await fetch(`http://localhost:4040/user/${state.user.id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      mode: 'cors',
       method: 'PUT',
       body: JSON.stringify(state.user),
     });
     res = await res.json();
-    setUsers({ action: 'update', id: res.id, user: res });
+    if (res.status === 200) {
+      setUsers({ action: 'update', id: res.id, user: res });
+    }
     handleClose();
   };
   return (
