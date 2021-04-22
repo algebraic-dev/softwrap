@@ -8,3 +8,7 @@
   0 22.3px 17.9px rgba(0, 0, 0, 0.022),
   0 41.8px 33.4px rgba(0, 0, 0, 0.026)
 }
+
+.DayPickerInput, .DayPickerInput input, form input{
+  width: 100%;
+}

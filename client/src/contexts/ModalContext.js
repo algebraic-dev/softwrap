@@ -5,7 +5,7 @@ export const ModalContext = createContext();
 
 function reducer(state, data) {
   if (data.action === 'show') {
-    return { show: true, user: {} };
+    return { show: true, user: data.user ? data.user : {} };
   }
   if (data.action === 'hide') {
     return { show: false, user: {} };
@@ -22,7 +22,7 @@ function reducer(state, data) {
 }
 
 export function ModalProvider({ children }) {
-  const state = useReducer(reducer, { action: 'hide' });
+  const state = useReducer(reducer, { action: 'hide', user: {} });
   return (
     <ModalContext.Provider value={state}>
       {children}
