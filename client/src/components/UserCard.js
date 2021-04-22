@@ -29,7 +29,7 @@ function UserCard({ user }) {
           {user.city}
         </Card.Text>
         <div style={{ textAlign: 'center' }}>
-          <Button variant="primary" onClick={() => setState({ show: true, id: user.id })} className="mr-4">Editar</Button>
+          <Button variant="primary" onClick={() => setState({ action: 'show' })} className="mr-4">Editar</Button>
           <Card.Link href="#">Remover</Card.Link>
         </div>
       </Card.Body>
