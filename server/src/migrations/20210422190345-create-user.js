@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       civil_state: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
       },
       cpf: {
         type: Sequelize.STRING,
@@ -37,6 +37,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('users');
   },
 };

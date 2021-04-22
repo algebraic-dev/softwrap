@@ -1,6 +1,6 @@
-const database = require('./database.js');
+const {sequelize} = require('./database.js');
 const Sequelize = require('sequelize');
-let userModel = require('../models/user.js')(database, Sequelize);
+let userModel = require('../models/user.js')(sequelize, Sequelize);
 
 let filterUser = user => {
   delete user.createdAt;
@@ -9,19 +9,37 @@ let filterUser = user => {
 }
 
 const getUser = async (req, res) => {
-  throw new Error('Not Implemented');
+  let data = (await userModel.findOne({
+    attributes: ['id', 'fullname', 'civil_state', 'cpf', 'city', 'state', 'birthday'],
+    where: {id: req.params.id},
+  }));
+  if(data){
+    res.json(data.dataValues).status(200).end();
+  } else{
+    res.json({}).status(404).end()
+  }
 };
 
 const modifyUser = async (req, res) => {
-  throw new Error('Not Implemented');
+  let data = (await userModel.findOne({
+    attributes: ['id', 'fullname', 'civil_state', 'cpf', 'city', 'state', 'birthday'],
+    where: {id: req.params.id},
+  }));
+  if(data){
+    let info = await data.update(req.body);
+    delete info.dataValues.updatedAt;
+    res.json(info.dataValues).status(200).end();
+  }else{
+    res.status(404).json({}).end();
+  }
 };
 
 const deleteUser = async (req, res) => {
-  let resp = await userModel.destroy({
+  await userModel.destroy({
     where: {
       'id': req.params.id
     }
-  })
+  });
   res.json({}).status(200);
 };
 
