@@ -10,6 +10,14 @@ function reducer(state, data) {
   if (data.action === 'hide') {
     return { show: false, user: {} };
   }
+  if (data.action === 'clear') {
+    return { show: false, user: {} };
+  }
+  if (data.action === 'change') {
+    const newState = state;
+    newState.user[data.key] = data.value;
+    return state;
+  }
   return state;
 }
 
