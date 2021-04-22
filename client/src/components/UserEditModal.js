@@ -2,14 +2,23 @@ import React, { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { ModalContext } from '../contexts/ModalContext';
+import { UserContext } from '../contexts/UserContext';
 import UserForm from './UserForm';
 
 function UserEditModal() {
   const [state, setState] = useContext(ModalContext);
+  const [, setUsers] = useContext(UserContext);
   const handleClose = () => setState({ action: 'hide' });
   const setUser = (key, value) => setState({ key, value, action: 'change' });
-  const submitAndClose = (e) => {
+  const submitAndClose = async (e) => {
     e.preventDefault();
+    let res = await fetch({
+      url: 'localhost:4040/user',
+      method: 'PUT',
+      body: JSON.stringify(state.user),
+    });
+    res = await res.json();
+    setUsers({ action: 'update', id: res.id, user: res });
     handleClose();
   };
   return (
@@ -24,7 +33,7 @@ function UserEditModal() {
         <Button variant="secondary" onClick={handleClose}>
           Fechar
         </Button>
-        <Button variant="primary" onClick={handleClose}>
+        <Button variant="primary" onClick={submitAndClose}>
           Modificar
         </Button>
       </Modal.Footer>

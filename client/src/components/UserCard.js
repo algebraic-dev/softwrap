@@ -8,6 +8,9 @@ import { ModalContext } from '../contexts/ModalContext';
 
 function UserCard({ user }) {
   const [, setState] = useContext(ModalContext);
+  const showModel = async () => {
+    setState({ action: 'show' });
+  };
   return (
     <Card className="smooth-shadow p-3 mx-auto mb-5 bg-white rounded" style={{ width: '17rem', border: 'none' }}>
       <Card.Body>
@@ -29,7 +32,7 @@ function UserCard({ user }) {
           {user.city}
         </Card.Text>
         <div style={{ textAlign: 'center' }}>
-          <Button variant="primary" onClick={() => setState({ action: 'show' })} className="mr-4">Editar</Button>
+          <Button variant="primary" onClick={showModel} className="mr-4">Editar</Button>
           <Card.Link href="#">Remover</Card.Link>
         </div>
       </Card.Body>
