@@ -24,7 +24,7 @@ function UserAddModal({ state, setState }) {
 }
 
 UserAddModal.propTypes = {
-  state: PropTypes.string.isRequired,
+  state: PropTypes.bool.isRequired,
   setState: PropTypes.func.isRequired,
 };
 

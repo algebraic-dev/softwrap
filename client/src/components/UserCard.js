@@ -17,13 +17,16 @@ function UserCard({ user }) {
           {DateUtil.calcAgeFromDate(user.birthday)}
           <br />
           Estado civil:
-          {user.martial_state}
+          {user.civil_state}
           <br />
           CPF:
           {user.cpf}
           <br />
-          Cidade-Estado:
-          {user.city_state}
+          Cidade:
+          {user.city}
+          <br />
+          Estado:
+          {user.city}
         </Card.Text>
         <div style={{ textAlign: 'center' }}>
           <Button variant="primary" onClick={() => setState({ show: true, id: user.id })} className="mr-4">Editar</Button>
@@ -39,9 +42,10 @@ UserCard.propTypes = {
     id: PropTypes.number,
     fullname: PropTypes.string,
     birthday: PropTypes.instanceOf(Date),
-    martial_state: PropTypes.oneOf(['Casado(a)', 'Solteiro(a)', 'Viuvo(a)']),
+    civil_state: PropTypes.string,
     cpf: PropTypes.string,
-    city_state: PropTypes.string,
+    city: PropTypes.string,
+    state: PropTypes.string,
   }).isRequired,
 };
 

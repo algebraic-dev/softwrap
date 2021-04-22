@@ -3,22 +3,18 @@ import PropTypes from 'prop-types';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import UserCard from '../components/UserCard';
-import GridHeader from '../components/GridHeader';
 
 function CardGrid({ users }) {
   return (
-    <>
-      <GridHeader />
-      <Row className="mx-auto">
-        {
-          users.map((user) => (
-            <Col key={user.id}>
-              <UserCard key={user.id} user={user} />
-            </Col>
-          ))
-        }
-      </Row>
-    </>
+    <Row className="mx-auto">
+      {
+        users.map((user) => (
+          <Col key={user.id}>
+            <UserCard key={user.id} user={user} />
+          </Col>
+        ))
+      }
+    </Row>
   );
 }
 
@@ -28,9 +24,10 @@ CardGrid.propTypes = {
       id: PropTypes.number,
       fullname: PropTypes.string,
       birthday: PropTypes.instanceOf(Date),
-      martial_state: PropTypes.oneOf(['Casado(a)', 'Solteiro(a)', 'Viuvo(a)']),
+      civil_state: PropTypes.string,
       cpf: PropTypes.string,
-      city_state: PropTypes.string,
+      city: PropTypes.string,
+      state: PropTypes.string,
     }),
   ).isRequired,
 };
