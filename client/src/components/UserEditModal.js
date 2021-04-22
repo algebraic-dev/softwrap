@@ -5,13 +5,15 @@ import { ModalContext } from '../contexts/ModalContext';
 
 function UserEditModal() {
   const [state, setState] = useContext(ModalContext);
-  const handleClose = () => setState({ show: false });
+  const handleClose = () => setState({ action: 'hide' });
   return (
     <Modal show={state.show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Edit an user!</Modal.Title>
       </Modal.Header>
-      <Modal.Body>Lorem Ipsum</Modal.Body>
+      <Modal.Body>
+        Ata
+      </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
           Fechar
