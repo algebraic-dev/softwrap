@@ -30,7 +30,7 @@ const getUser = (req, res) => {
 
 const modifyUser = async (req, res) => {
   if (Number.isNaN(req.params.id)) {
-    res.status(400).json({}).end();
+    res.status(400).end();
     return;
   }
   const data = await userModel.findOne({
@@ -42,7 +42,7 @@ const modifyUser = async (req, res) => {
     delete info.dataValues.updatedAt;
     res.json(info.dataValues).status(200).end();
   } else {
-    res.status(404).json({}).end();
+    res.status(404).end();
   }
 };
 
@@ -53,8 +53,8 @@ const deleteUser = (req, res) => {
         id: req.params.id,
       },
     })
-    .then(() => res.status(200))
-    .catch(() => res.status(400));
+    .then(() => res.status(200).end())
+    .catch(() => res.status(400).end());
 };
 
 const createUser = (req, res) => {
