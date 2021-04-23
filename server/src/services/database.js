@@ -1,9 +1,6 @@
 const { Sequelize } = require('sequelize');
 const config = require('../config/config.json');
 
-const testHelper = require('sequelize-test-helpers');
-
-
 const sequelize = new Sequelize(config[process.env.NODE_ENV || 'development']);
 
 function startDB() {
@@ -18,8 +15,6 @@ function startDB() {
             }
         })();
     }
-
 }
 
-
-module.exports = {sequelize, startDB, dataTypes: testHelper.dataTypes};
+module.exports = {conn: sequelize, startDB, Sequelize};

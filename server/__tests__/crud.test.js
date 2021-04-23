@@ -1,6 +1,8 @@
 const request = require('supertest');
 const faker = require('faker-br');
 const app = require("../src/server.js");
+const Sequelize = require('sequelize').DataTypes;
+
 function generateUser() {
   return {
     fullname: faker.name.findName(),
@@ -17,10 +19,45 @@ describe('test of CRUD operations', () => {
 
   beforeAll(async () => {
     await require('../src/services/database.js').startDB();
+    await require('../src/services/database.js').conn.getQueryInterface().createTable('users', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      fullname: {
+        type: Sequelize.STRING,
+      },
+      civil_state: {
+        type: Sequelize.INTEGER,
+      },
+      cpf: {
+        type: Sequelize.STRING,
+      },
+      city: {
+        type: Sequelize.STRING,
+      },
+      state: {
+        type: Sequelize.STRING,
+      },
+      age: {
+        type: Sequelize.INTEGER,
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+    });
   });
 
   afterAll(async () => {
     await require('../src/services/database.js').sequelize.close()
+    await require('../src/services/database.js').conn.getQueryInterface().dropTable('users')
   })
 
   it('Create user and check if it exists', (done) => {

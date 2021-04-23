@@ -1,17 +1,5 @@
-const {sequelize, dataTypes} = require('./database.js');
-let userModel;
-
-if(process.env.NODE_ENV == 'test'){
-  const proxyquire = require('proxyquire')
-  const { sequelize, Sequelize } = require('sequelize-test-helpers')
-  const UserFactory = proxyquire('../models/user.js', {
-    sequelize: Sequelize,
-    DataTypes: dataTypes
-  })
-  userModel = UserFactory(sequelize, Sequelize);
-} else {
-  userModel = require('../models/user.js')(sequelize, dataTypes);
-}
+const {conn, Sequelize} = require('./database.js');
+let userModel = require('../models/user.js')(conn, Sequelize);
 
 let filterUser = user => {
   delete user.createdAt;

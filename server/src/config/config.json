@@ -7,11 +7,8 @@
     "dialect": "postgres"
   },
   "test": {
-    "username": "postgres",
-    "password": "psql",
-    "database": "teeste",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "storage": "./test.sqlite",
+    "dialect": "sqlite"
   },
   "production": {
     "username": "root",
