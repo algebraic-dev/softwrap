@@ -66,14 +66,14 @@ describe('test of CRUD operations', () => {
   it('Create user and check if it exists', (done) => {
     const user = generateUser();
     request(app)
-      .post('/user/new')
+      .post('/api/user/new')
       .send(user)
       .then((response) => {
         expect(response.status).toBe(200);
         user.id = response.body.id;
 
         request(app)
-          .get(`/user/${response.body.id}`)
+          .get(`/api/user/${response.body.id}`)
           .then((resp) => {
             expect(resp.status).toBe(200);
             expect(resp.body).toEqual(user);
@@ -86,7 +86,7 @@ describe('test of CRUD operations', () => {
   it('Updates the user that does not exists', (done) => {
     const user = generateUser();
     request(app)
-      .put('/user/1203')
+      .put('/api/user/1203')
       .send(user)
       .then((resp) => {
         expect(resp.status).toBe(404);
@@ -98,14 +98,14 @@ describe('test of CRUD operations', () => {
   it('Updates the user that actually exists', (done) => {
     let user = generateUser();
     request(app)
-      .post('/user/new')
+      .post('/api/user/new')
       .send(user)
       .then((response) => {
         expect(response.status).toBe(200);
         user = generateUser();
         user.id = response.body.id;
         request(app)
-          .put(`/user/${user.id}`)
+          .put(`/api/user/${user.id}`)
           .send(user)
           .then((resp) => {
             expect(resp.status).toBe(200);
@@ -118,11 +118,11 @@ describe('test of CRUD operations', () => {
   it('Deletes the user', (done) => {
     const user = generateUser();
     request(app)
-      .post('/user/new')
+      .post('/api/user/new')
       .send(user)
       .then((response) => {
         request(app)
-          .delete(`/user/${response.body.id}`)
+          .delete(`/api/user/${response.body.id}`)
           .then((resp) => {
             expect(resp.status).toBe(200);
             done();

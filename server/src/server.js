@@ -30,7 +30,7 @@ app.use((error, _, res, next) => {
   }
 });
 
-app.use('/user', userRouter);
+app.use('/api/user', userRouter);
 
 app.use('*', (_, res) => {
   res.status(404).end();
