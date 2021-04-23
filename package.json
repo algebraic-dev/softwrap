@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "description": "A website for registering people",
   "scripts": {
+    "deps": "yarn --cwd client install && yarn --cwd server install", 
+    "migrate:db": "cd server/src && npx sequelize-cli db:migrate",
     "start:client": "yarn --cwd client run start",
     "start:server": "yarn --cwd server run start",
     "test:server": "cd server && yarn test"
