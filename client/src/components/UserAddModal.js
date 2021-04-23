@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import PropTypes from 'prop-types';
 import UserForm from './UserForm';
 import { UserContext } from '../contexts/UserContext';
+import { createUser } from '../utils/Api';
 
 function reducer(state, data) {
   if (data.action === 'change') {
@@ -25,15 +26,7 @@ function UserAddModal({ state, setState }) {
 
   const submitAndClose = async (e) => {
     e.preventDefault();
-    let res = await fetch('http://localhost:4040/user/new', {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      mode: 'cors',
-      body: JSON.stringify(user),
-    });
-    res = await res.json();
+    const res = await createUser(user);
     setUsers({ action: 'add', user: res });
     setProp({ action: 'clear' });
     handleClose();

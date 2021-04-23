@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { ModalContext } from '../contexts/ModalContext';
 import { UserContext } from '../contexts/UserContext';
+import { updateUser } from '../utils/Api';
 import UserForm from './UserForm';
 
 function UserEditModal() {
@@ -12,16 +13,8 @@ function UserEditModal() {
   const setUser = (key, value) => setState({ key, value, action: 'change' });
   const submitAndClose = async (e) => {
     e.preventDefault();
-    const res = await fetch(`http://localhost:4040/user/${state.user.id}`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      mode: 'cors',
-      method: 'PUT',
-      body: JSON.stringify(state.user),
-    });
-    const data = await res.json();
-    if (res.status === 200) {
+    const [status, data] = await updateUser(state.user.id, state.user);
+    if (status === 200) {
       setUsers({ action: 'update', id: data.id, user: data });
     }
     handleClose();

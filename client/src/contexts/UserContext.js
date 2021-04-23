@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
+import { getPage } from '../utils/Api';
 
 export const UserContext = createContext();
 
@@ -22,7 +23,7 @@ function reducer(state, data) {
   }
   if (data.action === 'set') {
     return {
-      page: 0,
+      page: data.page ? data.page : 0,
       pages: data.pages,
       users: data.users,
     };
@@ -37,28 +38,12 @@ function reducer(state, data) {
   return state;
 }
 
-async function getPage() {
-  let res = await fetch('http://localhost:4040/user/list/0', {
-    mode: 'cors',
-    method: 'GET',
-  });
-  res = await res.json();
-  return {
-    pages: res.pages,
-    users: res.users.map((user) => {
-      const newUser = user;
-      return newUser;
-    }),
-  };
-}
-
 export function UserProvider({ children }) {
   const [state, setState] = useReducer(reducer, { pages: 0, users: [], page: 0 });
 
   useEffect(() => {
-    getPage().then((res) => setState({
+    getPage(0).then((res) => setState({
       action: 'set',
-      page: 'inc',
       users: res.users,
       pages: res.pages,
     }));

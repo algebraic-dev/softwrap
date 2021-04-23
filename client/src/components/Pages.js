@@ -2,21 +2,7 @@ import React, { useContext } from 'react';
 import Pagination from 'react-bootstrap/Pagination';
 import PropTypes from 'prop-types';
 import { UserContext } from '../contexts/UserContext';
-
-const getPage = async (page) => {
-  let res = await fetch(`http://localhost:4040/user/list/${page}`, {
-    mode: 'cors',
-    method: 'GET',
-  });
-  res = await res.json();
-  return {
-    pages: res.pages,
-    users: res.users.map((user) => {
-      const newUser = user;
-      return newUser;
-    }),
-  };
-};
+import { getPage } from '../utils/Api';
 
 function Pages({ page, last }) {
   const [state, setState] = useContext(UserContext);

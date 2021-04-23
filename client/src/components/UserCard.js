@@ -5,18 +5,21 @@ import Button from 'react-bootstrap/Button';
 
 import { ModalContext } from '../contexts/ModalContext';
 import { UserContext } from '../contexts/UserContext';
+import { getPage, removeUser } from '../utils/Api';
 
 const civilStates = ['Solteiro(a)', 'Casado(a)', 'Divorciado(a)', 'Viúvo(a)', 'Separado(a)'];
 
 function UserCard({ user }) {
-  const [, setUsers] = useContext(UserContext);
+  const [state, setUsers] = useContext(UserContext);
   const [, setState] = useContext(ModalContext);
   async function deleteUser(id) {
-    await fetch(`http://localhost:4040/user/${id}`, {
-      method: 'DELETE',
-      mode: 'cors',
-    });
-    setUsers({ action: 'remove', id: user.id });
+    await removeUser(id);
+    getPage(state.page).then((res) => setUsers({
+      action: 'set',
+      page: state.page,
+      users: res.users,
+      pages: res.pages,
+    }));
   }
   const showModel = async () => {
     setState({ action: 'show', user });
