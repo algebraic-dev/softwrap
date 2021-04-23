@@ -1,12 +1,10 @@
+import axios from 'axios';
+
 export const getPage = async (page) => {
-  let res = await fetch(`http://localhost:4040/user/list/${page}`, {
-    mode: 'cors',
-    method: 'GET',
-  });
-  res = await res.json();
+  const res = await axios.get(`/api/user/list/${page}`);
   return {
-    pages: res.pages,
-    users: res.users.map((user) => {
+    pages: res.data.pages,
+    users: res.data.users.map((user) => {
       const newUser = user;
       return newUser;
     }),
@@ -14,32 +12,15 @@ export const getPage = async (page) => {
 };
 
 export const createUser = async (user) => {
-  const res = await fetch('http://localhost:4040/user/new', {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    method: 'POST',
-    mode: 'cors',
-    body: JSON.stringify(user),
-  });
-  return res.json();
+  const res = await axios.post('/api/user/new', user);
+  return res.data;
 };
 
 export const updateUser = async (id, user) => {
-  const res = await fetch(`http://localhost:4040/user/${id}`, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    mode: 'cors',
-    method: 'PUT',
-    body: JSON.stringify(user),
-  });
-  return [res.status, await res.json()];
+  const res = await axios.put(`/api/user/${id}`, user);
+  return [res.status, res.data];
 };
 
 export const removeUser = async (id) => (
-  fetch(`http://localhost:4040/user/${id}`, {
-    method: 'DELETE',
-    mode: 'cors',
-  })
+  axios.delete(`/api/user/${id}`)
 );
