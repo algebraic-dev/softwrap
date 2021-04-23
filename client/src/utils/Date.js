@@ -2,7 +2,7 @@ const formatTwoDigits = (n) => (n).toLocaleString('en-US', { minimumIntegerDigit
 
 export const calcAgeFromDate = (date) => {
   const diff = Date.now() - date.getTime();
-  return new Date(diff).getUTCFullYear() - 1970;
+  return Math.max(new Date(diff).getUTCFullYear() - 1970, 0);
 };
 
 export const formatDate = (date = new Date()) => {

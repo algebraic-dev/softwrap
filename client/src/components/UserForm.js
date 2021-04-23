@@ -68,7 +68,7 @@ function UserForm({
         value={user.city}
         onChange={setUserProp('city')}
         type="text"
-        placeholder="City"
+        placeholder="Ex: São Paulo"
       />
       <br />
       <Form.Label>Estado</Form.Label>
@@ -77,7 +77,7 @@ function UserForm({
         value={user.state}
         onChange={setUserProp('state')}
         type="text"
-        placeholder="State"
+        placeholder="Ex: São Paulo"
       />
       <br />
       <Form.Label>Data de nascimento</Form.Label>
