@@ -5,7 +5,7 @@ export const ModalContext = createContext();
 
 function reducer(state, data) {
   if (data.action === 'show') {
-    return { show: true, user: data.user };
+    return { show: true, user: JSON.parse(JSON.stringify(data.user)) };
   }
   if (data.action === 'hide') {
     return { show: false, user: {} };
@@ -16,7 +16,7 @@ function reducer(state, data) {
   if (data.action === 'change') {
     const newState = state;
     newState.user[data.key] = data.value;
-    return state;
+    return { [data.key]: data.value, ...state };
   }
   return state;
 }

@@ -9,7 +9,7 @@ function reducer(state, data) {
   }
   if (data.action === 'update') {
     const index = state.findIndex((user) => user.id === data.id);
-    const newState = state;
+    const newState = state.slice();
     newState[index] = data.user;
     return newState;
   }

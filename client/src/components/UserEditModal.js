@@ -12,8 +12,7 @@ function UserEditModal() {
   const setUser = (key, value) => setState({ key, value, action: 'change' });
   const submitAndClose = async (e) => {
     e.preventDefault();
-    console.log(state.user);
-    let res = await fetch(`http://localhost:4040/user/${state.user.id}`, {
+    const res = await fetch(`http://localhost:4040/user/${state.user.id}`, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -21,9 +20,10 @@ function UserEditModal() {
       method: 'PUT',
       body: JSON.stringify(state.user),
     });
-    res = await res.json();
+    const data = await res.json();
     if (res.status === 200) {
-      setUsers({ action: 'update', id: res.id, user: res });
+      data.birthday = new Date(data.birthday);
+      setUsers({ action: 'update', id: data.id, user: data });
     }
     handleClose();
   };

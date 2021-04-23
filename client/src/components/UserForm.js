@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
-import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
 import PropTypes from 'prop-types';
 
@@ -44,6 +43,7 @@ function UserForm({
       <Form.Label>CPF</Form.Label>
       <Form.Control
         required
+        value={user.cpf}
         onChange={setUserProp('cpf')}
         className="form-control"
         type="text"
@@ -58,7 +58,14 @@ function UserForm({
       <br />
       <Form.Label>Birthday</Form.Label>
       <br />
-      <DayPickerInput inputProps={{ required: true }} type="text" value={user.birthday} onDayChange={(day) => setUser('birthday', day)} />
+      <Form.Control
+        required
+        type="text"
+        value={user.birthday}
+        onChange={(e) => {
+          setUser('birthday', e.target.value);
+        }}
+      />
     </Form>
   );
 }

@@ -22,31 +22,23 @@ function UserCard({ user }) {
     setState({ action: 'show', user });
   };
   return (
-    <Card className="smooth-shadow p-3 mx-auto mb-5 bg-white rounded" style={{ width: '17rem', border: 'none' }}>
-      <Card.Body>
-        <Card.Title>{user.fullname}</Card.Title>
-        <Card.Text>
-          Idade:
-          {DateUtil.calcAgeFromDate(user.birthday)}
-          <br />
-          Estado civil:
-          {civilStates[user.civil_state]}
-          <br />
-          CPF:
-          {user.cpf}
-          <br />
-          Cidade:
-          {user.city}
-          <br />
-          Estado:
-          {user.state}
-        </Card.Text>
-        <div style={{ textAlign: 'center' }}>
-          <Button variant="primary" onClick={showModel} className="mr-4">Editar</Button>
-          <Card.Link style={{ cursor: 'pointer' }} onClick={() => deleteUser(user.id)}>Remover</Card.Link>
-        </div>
-      </Card.Body>
-    </Card>
+    <tr>
+      <td>{user.fullname}</td>
+      <td>{DateUtil.calcAgeFromDate(user.birthday)}</td>
+      <td>{civilStates[user.civil_state]}</td>
+      <td>{user.cpf}</td>
+      <td>{user.city}</td>
+      <td>{user.state}</td>
+      <td>
+        Idade
+      </td>
+      <td>
+        <Button variant="primary" onClick={showModel} className="mr-4">Editar</Button>
+      </td>
+      <td>
+        <Card.Link style={{ cursor: 'pointer' }} onClick={() => deleteUser(user.id)}>Remover</Card.Link>
+      </td>
+    </tr>
   );
 }
 

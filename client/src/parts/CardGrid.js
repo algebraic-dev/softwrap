@@ -1,20 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import UserCard from '../components/UserCard';
 
 function CardGrid({ users }) {
   return (
-    <Row className="mx-auto">
+    <table style={{ width: '90%', marginLeft: '5%', marginBottom: '50px' }}>
+      <tr>
+        <th>Nome</th>
+        <th>Idade</th>
+        <th>Estado Civil</th>
+        <th>CPF</th>
+        <th>Cidade</th>
+        <th>Estado</th>
+        <th>Idade</th>
+        <th>Editar</th>
+        <th>Remover</th>
+      </tr>
       {
         users.map((user) => (
-          <Col key={user.id}>
-            <UserCard key={user.id} user={user} />
-          </Col>
+          <UserCard key={user.id} user={user} />
         ))
       }
-    </Row>
+    </table>
   );
 }
 
