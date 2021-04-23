@@ -7,6 +7,7 @@ import { ModalContext } from '../contexts/ModalContext';
 import { UserContext } from '../contexts/UserContext';
 
 const civilStates = ['Solteiro(a)', 'Casado(a)', 'Divorciado(a)', 'Viúvo(a)', 'Separado(a)'];
+
 function UserCard({ user }) {
   const [, setUsers] = useContext(UserContext);
   const [, setState] = useContext(ModalContext);
@@ -28,9 +29,6 @@ function UserCard({ user }) {
       <td>{user.cpf}</td>
       <td>{user.city}</td>
       <td>{user.state}</td>
-      <td>
-        Idade
-      </td>
       <td>
         <Button variant="primary" onClick={showModel} className="mr-4">Editar</Button>
       </td>

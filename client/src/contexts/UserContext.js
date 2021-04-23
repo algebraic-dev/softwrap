@@ -5,40 +5,63 @@ export const UserContext = createContext();
 
 function reducer(state, data) {
   if (data.action === 'add') {
-    return [data.user, ...state];
+    return { users: [data.user, ...state.users], page: state.page, pages: state.pages };
   }
   if (data.action === 'update') {
-    const index = state.findIndex((user) => user.id === data.id);
-    const newState = state.slice();
-    newState[index] = data.user;
-    return newState;
+    const index = state.users.findIndex((user) => user.id === data.id);
+    const newUsers = state.users.slice();
+    newUsers[index] = data.user;
+    return { page: state.page, users: newUsers, pages: state.pages };
   }
   if (data.action === 'remove') {
-    return state.filter((user) => user.id !== data.id);
+    return {
+      page: state.page,
+      pages: state.pages,
+      users: state.users.filter((user) => user.id !== data.id),
+    };
   }
   if (data.action === 'set') {
-    return data.users;
+    return {
+      page: 0,
+      pages: data.pages,
+      users: data.users,
+    };
+  }
+  if (data.action === 'paginate') {
+    return {
+      page: data.page === 'inc' ? state.page + 1 : state.page - 1,
+      pages: data.pages,
+      users: data.users,
+    };
   }
   return state;
 }
 
 async function getPage() {
-  let res = await fetch('http://localhost:4040/user/search/0', {
+  let res = await fetch('http://localhost:4040/user/list/0', {
     mode: 'cors',
     method: 'GET',
   });
   res = await res.json();
-  return res.map((user) => {
-    const newUser = user;
-    return newUser;
-  });
+  return {
+    pages: res.pages,
+    users: res.users.map((user) => {
+      const newUser = user;
+      return newUser;
+    }),
+  };
 }
 
 export function UserProvider({ children }) {
-  const [state, setState] = useReducer(reducer, []);
+  const [state, setState] = useReducer(reducer, { pages: 0, users: [], page: 0 });
 
   useEffect(() => {
-    getPage().then((res) => setState({ action: 'set', users: res }));
+    getPage().then((res) => setState({
+      action: 'set',
+      page: 'inc',
+      users: res.users,
+      pages: res.pages,
+    }));
   }, []);
 
   return (
