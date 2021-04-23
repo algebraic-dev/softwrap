@@ -56,7 +56,7 @@ const createUser = async (req,res) => {
 const listUsers = async (req, res) => {
   let data = (await userModel.findAll({
     attributes: ['id', 'fullname', 'civil_state', 'cpf', 'city', 'state', 'age'],
-    order: sequelize.literal('id DESC'),
+    order: conn.literal('id DESC'),
   })).map(data => data.dataValues);
   res.json(data).status(200).end();
 };
