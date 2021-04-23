@@ -10,7 +10,7 @@ function reducer(state, data) {
   if (data.action === 'change') {
     const newState = { ...state };
     newState[data.key] = data.value;
-    return state;
+    return newState;
   }
   if (data.action === 'clear') {
     return {
