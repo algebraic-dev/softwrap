@@ -1,52 +1,40 @@
-const { userModel } = require('./database.js');
+const { userModel, conn } = require('./database.js');
 
-const filterUser = (user) => {
-  const newUser = { ...user };
-  delete newUser.createdAt;
-  delete newUser.updatedAt;
-  return user;
-};
+const userAttributes = [
+  'id',
+  'fullname',
+  'civil_state',
+  'cpf',
+  'city',
+  'state',
+  'birthday',
+];
 
 const getUser = (req, res) => {
   userModel
     .findOne({
-      attributes: [
-        'id',
-        'fullname',
-        'civil_state',
-        'cpf',
-        'city',
-        'state',
-        'birthday',
-      ],
+      attributes: userAttributes,
       where: { id: req.params.id },
     })
     .then((data) => {
       if (data) {
         res.json(data.dataValues).status(200).end();
       } else {
-        res.status(404).json({ error: true });
+        res.status(404).end();
       }
     })
     .catch(() => {
-      res.status(204).json({ error: true });
+      res.status(400).end();
     });
 };
 
 const modifyUser = async (req, res) => {
-  if(isNaN( req.params.id)){
-    return res.status(204).json({}).end();
+  if (Number.isNaN(req.params.id)) {
+    res.status(400).json({}).end();
+    return;
   }
   const data = await userModel.findOne({
-    attributes: [
-      'id',
-      'fullname',
-      'civil_state',
-      'cpf',
-      'city',
-      'state',
-      'birthday',
-    ],
+    attributes: userAttributes,
     where: { id: req.params.id },
   });
   if (data) {
@@ -58,23 +46,25 @@ const modifyUser = async (req, res) => {
   }
 };
 
-const deleteUser = async (req, res) => {
-  await userModel.destroy({
-    where: {
-      id: req.params.id,
-    },
-  });
-  res.json({}).status(200);
+const deleteUser = (req, res) => {
+  userModel
+    .destroy({
+      where: {
+        id: req.params.id,
+      },
+    })
+    .then(() => res.status(200))
+    .catch(() => res.status(400));
 };
 
-const createUser = async (req, res) => {
+const createUser = (req, res) => {
   userModel
     .create(req.body)
     .then((data) => {
-      res.status(200).json(filterUser(data.dataValues)).end();
+      res.status(200).json(data.dataValues).end();
     })
     .catch(() => {
-      res.status(204).json({ erro: true }).end();
+      res.status(400).end();
     });
 };
 
@@ -82,18 +72,12 @@ const listUsers = async (req, res) => {
   const count = await userModel.count({});
   const data = (
     await userModel.findAll({
-      attributes: [
-        'id',
-        'fullname',
-        'civil_state',
-        'cpf',
-        'city',
-        'state',
-        'birthday',
-      ],
+      attributes: userAttributes,
       order: conn.literal('id DESC'),
       limit: 10,
-      offset: Number.isNaN(req.params.page) ? 0 : parseInt(req.params.page, 10) * 10,
+      offset: Number.isNaN(req.params.page)
+        ? 0
+        : parseInt(req.params.page, 10) * 10,
     })
   ).map((item) => item.dataValues);
   res
