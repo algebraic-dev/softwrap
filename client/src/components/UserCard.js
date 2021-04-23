@@ -49,7 +49,7 @@ UserCard.propTypes = {
     fullname: PropTypes.string,
     birthday: PropTypes.objectOf(Date),
     civil_state: PropTypes.string,
-    cpf: PropTypes.number,
+    cpf: PropTypes.string,
     city: PropTypes.string,
     state: PropTypes.string,
   }).isRequired,

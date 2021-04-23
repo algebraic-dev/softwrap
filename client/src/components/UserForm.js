@@ -13,7 +13,7 @@ function UserForm({
 
   // It's used for currying inside the onChange.
   const setUserProp = (prop) => (event) => (setUser(prop, event.target.value));
-  const [birthday, setBirthday] = useState(formatDate(user.birthday ? user.birthday : new Date()));
+  const [birthday, setBirthday] = useState(formatDate(new Date(user.birthday)));
 
   const checkOnSubmit = (event) => {
     const form = event.currentTarget;
@@ -27,11 +27,11 @@ function UserForm({
   };
   return (
     <Form noValidate validated={validated} id={id} onSubmit={checkOnSubmit}>
-      <Form.Label>Fullname</Form.Label>
-      <Form.Control required type="text" placeholder="Fullname" value={user.fullname} onChange={setUserProp('fullname')} />
+      <Form.Label>Nome completo</Form.Label>
+      <Form.Control required type="text" placeholder="Ex: João Silva" value={user.fullname} onChange={setUserProp('fullname')} />
       <br />
       <Form.Group controlId="exampleForm.SelectCustom">
-        <Form.Label>Civil State</Form.Label>
+        <Form.Label>Estado civil</Form.Label>
         <Form.Control required value={user.civil_state} onChange={setUserProp('civil_state')} as="select" custom>
           <option value={0}>Solteiro(a)</option>
           <option value={1}>Casado(a)</option>
@@ -46,17 +46,17 @@ function UserForm({
         value={user.cpf}
         onChange={setUserProp('cpf')}
         className="form-control"
-        type="number"
+        type="text"
         placeholder="Ex: 1231231230"
       />
       <br />
-      <Form.Label>City</Form.Label>
+      <Form.Label>Cidade</Form.Label>
       <Form.Control required value={user.city} onChange={setUserProp('city')} type="text" placeholder="City" />
       <br />
-      <Form.Label>State</Form.Label>
+      <Form.Label>Estado</Form.Label>
       <Form.Control required value={user.state} onChange={setUserProp('state')} type="text" placeholder="State" />
       <br />
-      <Form.Label>Birthday</Form.Label>
+      <Form.Label>Data de nascimento</Form.Label>
       <br />
       <Form.Control
         required
@@ -64,7 +64,7 @@ function UserForm({
         value={birthday}
         onChange={(event) => {
           setBirthday(event.target.value);
-          setUser('birthday', new Date(event.target.value));
+          setUser('birthday', new Date(event.target.value).toISOString());
         }}
       />
     </Form>
@@ -75,9 +75,9 @@ UserForm.propTypes = {
   user: PropTypes.shape({
     id: PropTypes.number,
     fullname: PropTypes.string,
-    birthday: PropTypes.objectOf(Date),
+    birthday: PropTypes.string,
     civil_state: PropTypes.string,
-    cpf: PropTypes.number,
+    cpf: PropTypes.string,
     city: PropTypes.string,
     state: PropTypes.string,
   }),

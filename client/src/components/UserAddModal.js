@@ -34,7 +34,7 @@ function UserAddModal({ state, setState }) {
   return (
     <Modal show={state} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Add an user</Modal.Title>
+        <Modal.Title>Adicionar usuário</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <UserForm id="adduser" user={user} setUser={setUser} onSubmit={submitAndClose} />

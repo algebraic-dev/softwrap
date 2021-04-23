@@ -22,7 +22,7 @@ function UserEditModal() {
   return (
     <Modal show={state.show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Edit an user!</Modal.Title>
+        <Modal.Title>Editar um usuário</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <UserForm id="adduser" user={state.user} setUser={setUser} onSubmit={submitAndClose} />
