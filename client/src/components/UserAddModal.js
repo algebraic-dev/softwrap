@@ -34,7 +34,6 @@ function UserAddModal({ state, setState }) {
       body: JSON.stringify(user),
     });
     res = await res.json();
-    res.birthday = new Date(res.birthday);
     setUsers({ action: 'add', user: res });
     setProp({ action: 'clear' });
     handleClose();

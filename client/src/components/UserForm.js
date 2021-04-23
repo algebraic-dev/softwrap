@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
-import 'react-day-picker/lib/style.css';
 import PropTypes from 'prop-types';
 
 function UserForm({
@@ -56,14 +55,14 @@ function UserForm({
       <Form.Label>State</Form.Label>
       <Form.Control required value={user.state} onChange={setUserProp('state')} type="text" placeholder="State" />
       <br />
-      <Form.Label>Birthday</Form.Label>
+      <Form.Label>Age</Form.Label>
       <br />
       <Form.Control
         required
         type="text"
-        value={user.birthday}
+        value={user.age}
         onChange={(e) => {
-          setUser('birthday', e.target.value);
+          setUser('age', e.target.value);
         }}
       />
     </Form>
@@ -74,7 +73,7 @@ UserForm.propTypes = {
   user: PropTypes.shape({
     id: PropTypes.number,
     fullname: PropTypes.string,
-    birthday: PropTypes.instanceOf(Date),
+    age: PropTypes.number,
     civil_state: PropTypes.string,
     cpf: PropTypes.string,
     city: PropTypes.string,

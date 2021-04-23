@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import DateUtil from '../utils/Date';
 
 import { ModalContext } from '../contexts/ModalContext';
 import { UserContext } from '../contexts/UserContext';
@@ -24,7 +23,7 @@ function UserCard({ user }) {
   return (
     <tr>
       <td>{user.fullname}</td>
-      <td>{DateUtil.calcAgeFromDate(user.birthday)}</td>
+      <td>{user.age}</td>
       <td>{civilStates[user.civil_state]}</td>
       <td>{user.cpf}</td>
       <td>{user.city}</td>
@@ -46,7 +45,7 @@ UserCard.propTypes = {
   user: PropTypes.shape({
     id: PropTypes.number,
     fullname: PropTypes.string,
-    birthday: PropTypes.instanceOf(Date),
+    age: PropTypes.number,
     civil_state: PropTypes.string,
     cpf: PropTypes.string,
     city: PropTypes.string,

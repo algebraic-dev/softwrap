@@ -1,11 +1,10 @@
 const request = require('supertest');
 const faker = require('faker-br');
 const app = require("../src/server.js");
-
 function generateUser() {
   return {
     fullname: faker.name.findName(),
-    birthday: faker.date.between('1950-01-01', '2020-01-01').toISOString(),
+    age: Math.floor(Math.random()*100),
     civil_state: Math.floor(Math.random() * 5),
     cpf: faker.br.cpf(),
     city: faker.address.city(),
@@ -13,10 +12,11 @@ function generateUser() {
   }
 }
 
+
 describe('test of CRUD operations', () => {
 
   beforeAll(async () => {
-    await require('../src/services/database.js').startDB()
+    await require('../src/services/database.js').startDB();
   });
 
   afterAll(async () => {

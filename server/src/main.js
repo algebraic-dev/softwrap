@@ -1,6 +1,8 @@
 const dotenv = require('dotenv');
 const server = require('./server.js');
 
+require("./services/database.js").startDB();
+
 if (process.env.NODE_ENV === 'test') {
   dotenv.config();
 }

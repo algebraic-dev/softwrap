@@ -1,16 +1,25 @@
 const { Sequelize } = require('sequelize');
 const config = require('../config/config.json');
 
+const testHelper = require('sequelize-test-helpers');
+
+
 const sequelize = new Sequelize(config[process.env.NODE_ENV || 'development']);
 
-async function startDB(){
-    try {
-        await sequelize.authenticate();
-        console.log('Connected to DB');
-    } catch (error) {
-        console.error('Unable to connect to DB', error);
-        process.exit(1);
+function startDB() {
+    if (process.env.NODE_ENV != 'test') {
+        (async () => {
+            try {
+                await sequelize.authenticate();
+                console.log('Connected to DB');
+            } catch (error) {
+                console.error('Unable to connect to DB', error);
+                process.exit(1);
+            }
+        })();
     }
+
 }
 
-module.exports = {sequelize, startDB};
+
+module.exports = {sequelize, startDB, dataTypes: testHelper.dataTypes};

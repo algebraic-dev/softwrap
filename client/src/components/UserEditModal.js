@@ -22,7 +22,6 @@ function UserEditModal() {
     });
     const data = await res.json();
     if (res.status === 200) {
-      data.birthday = new Date(data.birthday);
       setUsers({ action: 'update', id: data.id, user: data });
     }
     handleClose();

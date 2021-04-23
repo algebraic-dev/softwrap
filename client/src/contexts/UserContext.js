@@ -30,7 +30,6 @@ async function getPage() {
   res = await res.json();
   return res.map((user) => {
     const newUser = user;
-    newUser.birthday = new Date(user.birthday);
     return newUser;
   });
 }

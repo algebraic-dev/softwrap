@@ -1,6 +1,17 @@
-const {sequelize} = require('./database.js');
-const Sequelize = require('sequelize');
-let userModel = require('../models/user.js')(sequelize, Sequelize);
+const {sequelize, dataTypes} = require('./database.js');
+let userModel;
+
+if(process.env.NODE_ENV == 'test'){
+  const proxyquire = require('proxyquire')
+  const { sequelize, Sequelize } = require('sequelize-test-helpers')
+  const UserFactory = proxyquire('../models/user.js', {
+    sequelize: Sequelize,
+    DataTypes: dataTypes
+  })
+  userModel = UserFactory(sequelize, Sequelize);
+} else {
+  userModel = require('../models/user.js')(sequelize, dataTypes);
+}
 
 let filterUser = user => {
   delete user.createdAt;
@@ -10,7 +21,7 @@ let filterUser = user => {
 
 const getUser = async (req, res) => {
   let data = (await userModel.findOne({
-    attributes: ['id', 'fullname', 'civil_state', 'cpf', 'city', 'state', 'birthday'],
+    attributes: ['id', 'fullname', 'civil_state', 'cpf', 'city', 'state', 'age'],
     where: {id: req.params.id},
   }));
   if(data){
@@ -22,7 +33,7 @@ const getUser = async (req, res) => {
 
 const modifyUser = async (req, res) => {
   let data = (await userModel.findOne({
-    attributes: ['id', 'fullname', 'civil_state', 'cpf', 'city', 'state', 'birthday'],
+    attributes: ['id', 'fullname', 'civil_state', 'cpf', 'city', 'state', 'age'],
     where: {id: req.params.id},
   }));
   if(data){
@@ -56,7 +67,8 @@ const createUser = async (req,res) => {
 
 const listUsers = async (req, res) => {
   let data = (await userModel.findAll({
-    attributes: ['id', 'fullname', 'civil_state', 'cpf', 'city', 'state', 'birthday']
+    attributes: ['id', 'fullname', 'civil_state', 'cpf', 'city', 'state', 'age'],
+    order: sequelize.literal('id DESC'),
   })).map(data => data.dataValues);
   res.json(data).status(200).end();
 };

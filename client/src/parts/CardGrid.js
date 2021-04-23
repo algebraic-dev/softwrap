@@ -30,7 +30,7 @@ CardGrid.propTypes = {
     PropTypes.shape({
       id: PropTypes.number,
       fullname: PropTypes.string,
-      birthday: PropTypes.instanceOf(Date),
+      age: PropTypes.number,
       civil_state: PropTypes.string,
       cpf: PropTypes.string,
       city: PropTypes.string,
