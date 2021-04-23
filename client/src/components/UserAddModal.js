@@ -8,12 +8,14 @@ import { createUser, getPage } from '../utils/Api';
 
 function reducer(state, data) {
   if (data.action === 'change') {
-    const newState = state;
+    const newState = { ...state };
     newState[data.key] = data.value;
     return state;
   }
   if (data.action === 'clear') {
-    return { };
+    return {
+      fullname: '',
+    };
   }
   return state;
 }
