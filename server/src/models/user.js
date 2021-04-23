@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     cpf: DataTypes.STRING,
     city: DataTypes.STRING,
     state: DataTypes.STRING,
-    age: DataTypes.INTEGER
+    birthday: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'users',

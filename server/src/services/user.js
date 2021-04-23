@@ -9,7 +9,7 @@ let filterUser = user => {
 
 const getUser = async (req, res) => {
   let data = (await userModel.findOne({
-    attributes: ['id', 'fullname', 'civil_state', 'cpf', 'city', 'state', 'age'],
+    attributes: ['id', 'fullname', 'civil_state', 'cpf', 'city', 'state', 'birthday'],
     where: {id: req.params.id},
   }));
   if(data){
@@ -21,7 +21,7 @@ const getUser = async (req, res) => {
 
 const modifyUser = async (req, res) => {
   let data = (await userModel.findOne({
-    attributes: ['id', 'fullname', 'civil_state', 'cpf', 'city', 'state', 'age'],
+    attributes: ['id', 'fullname', 'civil_state', 'cpf', 'city', 'state', 'birthday'],
     where: {id: req.params.id},
   }));
   if(data){
@@ -47,7 +47,8 @@ const createUser = async (req,res) => {
   .then((data) => {
     res.status(200).json(filterUser(data.dataValues)).end();
   })
-  .catch(() => {
+  .catch((error) => {
+    console.log(error)
     res.status(204).end();
   })
 };
@@ -55,7 +56,7 @@ const createUser = async (req,res) => {
 const listUsers = async (req, res) => {
   let count = await userModel.count({});
   let data = (await userModel.findAll({
-    attributes: ['id', 'fullname', 'civil_state', 'cpf', 'city', 'state', 'age'],
+    attributes: ['id', 'fullname', 'civil_state', 'cpf', 'city', 'state', 'birthday'],
     order: conn.literal('id DESC'),
     limit: 10, 
     offset: isNaN(req.params.page) ? 0 : parseInt(req.params.page)*10

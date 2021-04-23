@@ -6,14 +6,13 @@ const Sequelize = require('sequelize').DataTypes;
 function generateUser() {
   return {
     fullname: faker.name.findName(),
-    age: Math.floor(Math.random()*100),
+    birthday: faker.date.between('1950-01-01', '2020-01-01').toISOString(),
     civil_state: Math.floor(Math.random() * 5),
     cpf: faker.br.cpf(),
     city: faker.address.city(),
     state: faker.address.stateAbbr()
   }
 }
-
 
 describe('test of CRUD operations', () => {
 
@@ -41,8 +40,8 @@ describe('test of CRUD operations', () => {
       state: {
         type: Sequelize.STRING,
       },
-      age: {
-        type: Sequelize.INTEGER,
+      birthday: {
+        type: Sequelize.DATE,
       },
       createdAt: {
         allowNull: false,

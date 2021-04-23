@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import PropTypes from 'prop-types';
+import { formatDate } from '../utils/Date';
 
 function UserForm({
   user,
@@ -12,6 +13,7 @@ function UserForm({
 
   // It's used for currying inside the onChange.
   const setUserProp = (prop) => (event) => (setUser(prop, event.target.value));
+  const [birthday, setBirthday] = useState(formatDate(user.birthday ? user.birthday : new Date()));
 
   const checkOnSubmit = (event) => {
     const form = event.currentTarget;
@@ -23,7 +25,6 @@ function UserForm({
     }
     setValidated(true);
   };
-
   return (
     <Form noValidate validated={validated} id={id} onSubmit={checkOnSubmit}>
       <Form.Label>Fullname</Form.Label>
@@ -45,8 +46,8 @@ function UserForm({
         value={user.cpf}
         onChange={setUserProp('cpf')}
         className="form-control"
-        type="text"
-        placeholder="Ex: 123.123.123-0"
+        type="number"
+        placeholder="Ex: 1231231230"
       />
       <br />
       <Form.Label>City</Form.Label>
@@ -55,14 +56,15 @@ function UserForm({
       <Form.Label>State</Form.Label>
       <Form.Control required value={user.state} onChange={setUserProp('state')} type="text" placeholder="State" />
       <br />
-      <Form.Label>Age</Form.Label>
+      <Form.Label>Birthday</Form.Label>
       <br />
       <Form.Control
         required
-        type="text"
-        value={user.age}
-        onChange={(e) => {
-          setUser('age', e.target.value);
+        type="date"
+        value={birthday}
+        onChange={(event) => {
+          setBirthday(event.target.value);
+          setUser('birthday', new Date(event.target.value));
         }}
       />
     </Form>
@@ -73,9 +75,9 @@ UserForm.propTypes = {
   user: PropTypes.shape({
     id: PropTypes.number,
     fullname: PropTypes.string,
-    age: PropTypes.number,
+    birthday: PropTypes.objectOf(Date),
     civil_state: PropTypes.string,
-    cpf: PropTypes.string,
+    cpf: PropTypes.number,
     city: PropTypes.string,
     state: PropTypes.string,
   }),

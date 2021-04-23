@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import { ModalContext } from '../contexts/ModalContext';
 import { UserContext } from '../contexts/UserContext';
 import { getPage, removeUser } from '../utils/Api';
+import { calcAgeFromDate } from '../utils/Date';
 
 const civilStates = ['Solteiro(a)', 'Casado(a)', 'Divorciado(a)', 'Viúvo(a)', 'Separado(a)'];
 
@@ -27,7 +28,7 @@ function UserCard({ user }) {
   return (
     <tr>
       <td>{user.fullname}</td>
-      <td>{user.age}</td>
+      <td>{calcAgeFromDate(new Date(user.birthday))}</td>
       <td>{civilStates[user.civil_state]}</td>
       <td>{user.cpf}</td>
       <td>{user.city}</td>
@@ -46,9 +47,9 @@ UserCard.propTypes = {
   user: PropTypes.shape({
     id: PropTypes.number,
     fullname: PropTypes.string,
-    age: PropTypes.number,
+    birthday: PropTypes.objectOf(Date),
     civil_state: PropTypes.string,
-    cpf: PropTypes.string,
+    cpf: PropTypes.number,
     city: PropTypes.string,
     state: PropTypes.string,
   }).isRequired,
