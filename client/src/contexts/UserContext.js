@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
-import { getPage } from '../utils/Api';
+import { getPage } from '../utils/api';
 
 export const UserContext = createContext();
 

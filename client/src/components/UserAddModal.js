@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import PropTypes from 'prop-types';
 import UserForm from './UserForm';
 import { UserContext } from '../contexts/UserContext';
-import { createUser, getPage } from '../utils/Api';
+import { createUser, getPage } from '../utils/api';
 
 function reducer(state, data) {
   if (data.action === 'change') {

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Pagination from 'react-bootstrap/Pagination';
 import PropTypes from 'prop-types';
 import { UserContext } from '../contexts/UserContext';
-import { getPage } from '../utils/Api';
+import { getPage } from '../utils/api';
 
 function Pages({ page, last }) {
   const [state, setState] = useContext(UserContext);

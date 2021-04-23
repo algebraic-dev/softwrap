@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { ModalContext } from '../contexts/ModalContext';
 import { UserContext } from '../contexts/UserContext';
-import { updateUser } from '../utils/Api';
+import { updateUser } from '../utils/api';
 import UserForm from './UserForm';
 
 function UserEditModal() {

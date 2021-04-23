@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import PropTypes from 'prop-types';
-import { formatDate } from '../utils/Date';
+import { formatDate } from '../utils/date';
 
 function UserForm({
   user,

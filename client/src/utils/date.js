@@ -2,6 +2,7 @@ const formatTwoDigits = (n) => (n).toLocaleString('en-US', { minimumIntegerDigit
 
 export const calcAgeFromDate = (date) => {
   const diff = Date.now() - date.getTime();
+  // I subtracted 1970 because the UTC timestamp format starts at 1970
   return Math.max(new Date(diff).getUTCFullYear() - 1970, 0);
 };
 

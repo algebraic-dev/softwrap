@@ -5,8 +5,8 @@ import Button from 'react-bootstrap/Button';
 
 import { ModalContext } from '../contexts/ModalContext';
 import { UserContext } from '../contexts/UserContext';
-import { getPage, removeUser } from '../utils/Api';
-import { calcAgeFromDate } from '../utils/Date';
+import { getPage, removeUser } from '../utils/api';
+import { calcAgeFromDate } from '../utils/date';
 
 const civilStates = ['Solteiro(a)', 'Casado(a)', 'Divorciado(a)', 'Viúvo(a)', 'Separado(a)'];
 
