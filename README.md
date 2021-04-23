@@ -11,8 +11,9 @@
 - Idade
 - Estado Civil
 - CPF
-- Cidade-Estado
+- Cidade
+- Estado
 
 ## Tecnologias usadas
-Para o front-end será utilizado React com React bootstrap.
-e para o back-end será utilizado Express.js, Jest para testes unitários e de integração.
+Para o front-end será utilizado React com React bootstrap, para o back-end será utilizado Express.js com Body-parser por ser simples de criar rotas e fazer parsing do json que chega na requisição http junto com Jest para testes unitários e de integração. Para testes, o banco de dados utilizado é o Sqlite por ser simples de colocar dentro do Continuous Integration do Github e em ambiente de desenvolvimento e produção é utilizado Postgresql. Os dois bancos de dados são manipulados pela dependencia Sequelize que é um ORM que funciona para diversos bancos de dados. 
+
