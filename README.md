@@ -1,5 +1,7 @@
 <h1 align="center">Softwrap</h1>
 
+![Demonstração](https://s3.gifyu.com/images/ezgif.com-gif-maker3c3d044c1fb8f568.gif)
+
 ## Oque é isso?
 Nesse repositório há o front e back end de uma aplicação para cadastrar, editar e remover usuários. 
 
