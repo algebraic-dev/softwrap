@@ -1,5 +1,4 @@
-const { conn, Sequelize } = require('./database.js');
-const userModel = require('../models/user.js')(conn, Sequelize);
+const { userModel } = require('./database.js');
 
 const filterUser = (user) => {
   const newUser = { ...user };
