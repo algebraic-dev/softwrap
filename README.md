@@ -19,7 +19,7 @@ $ yarn deps
 ```
 Para migrar a tabela para o banco de dados de desenvolvimento (sqlite):
 ```
-$ yarn migrate
+$ yarn migrate:db
 ```
 Para iniciar o front-end com React:
 ```
