@@ -50,7 +50,6 @@ const createUser = async (req,res) => {
   .catch(() => {
     res.status(204).end();
   })
-  //throw new Error('Not Implemented');
 };
 
 const listUsers = async (req, res) => {
