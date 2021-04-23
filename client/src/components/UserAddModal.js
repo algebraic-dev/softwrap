@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import PropTypes from 'prop-types';
 import UserForm from './UserForm';
 import { UserContext } from '../contexts/UserContext';
-import { createUser } from '../utils/Api';
+import { createUser, getPage } from '../utils/Api';
 
 function reducer(state, data) {
   if (data.action === 'change') {
@@ -13,21 +13,27 @@ function reducer(state, data) {
     return state;
   }
   if (data.action === 'clear') {
-    return { civil_state: '0' };
+    return { };
   }
   return state;
 }
 
 function UserAddModal({ state, setState }) {
-  const [, setUsers] = useContext(UserContext);
+  const [users, setUsers] = useContext(UserContext);
   const handleClose = () => setState(false);
-  const [user, setProp] = useReducer(reducer, { civil_state: '0' });
+  const [user, setProp] = useReducer(reducer, { });
   const setUser = (key, value) => setProp({ key, value, action: 'change' });
 
   const submitAndClose = async (e) => {
     e.preventDefault();
-    const res = await createUser(user);
-    setUsers({ action: 'add', user: res });
+    if (!user.civil_state)user.civil_state = 0;
+    await createUser(user);
+    getPage(users.page).then((resp) => setUsers({
+      action: 'set',
+      page: state.page,
+      users: resp.users,
+      pages: resp.pages,
+    }));
     setProp({ action: 'clear' });
     handleClose();
   };

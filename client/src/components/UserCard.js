@@ -47,8 +47,8 @@ UserCard.propTypes = {
   user: PropTypes.shape({
     id: PropTypes.number,
     fullname: PropTypes.string,
-    birthday: PropTypes.objectOf(Date),
-    civil_state: PropTypes.string,
+    birthday: PropTypes.string,
+    civil_state: PropTypes.number,
     cpf: PropTypes.string,
     city: PropTypes.string,
     state: PropTypes.string,

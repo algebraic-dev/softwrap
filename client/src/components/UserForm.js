@@ -12,7 +12,7 @@ function UserForm({
   const [validated, setValidated] = useState(false);
 
   // It's used for currying inside the onChange.
-  const setUserProp = (prop) => (event) => (setUser(prop, event.target.value));
+  const setUserProp = (prop) => (event) => setUser(prop, event.target.value);
   const [birthday, setBirthday] = useState(formatDate(new Date(user.birthday)));
 
   const checkOnSubmit = (event) => {
@@ -28,16 +28,28 @@ function UserForm({
   return (
     <Form noValidate validated={validated} id={id} onSubmit={checkOnSubmit}>
       <Form.Label>Nome completo</Form.Label>
-      <Form.Control required type="text" placeholder="Ex: João Silva" value={user.fullname} onChange={setUserProp('fullname')} />
+      <Form.Control
+        required
+        type="text"
+        placeholder="Ex: João Silva"
+        value={user.fullname}
+        onChange={setUserProp('fullname')}
+      />
       <br />
       <Form.Group controlId="exampleForm.SelectCustom">
         <Form.Label>Estado civil</Form.Label>
-        <Form.Control required value={user.civil_state} onChange={setUserProp('civil_state')} as="select" custom>
-          <option value={0}>Solteiro(a)</option>
-          <option value={1}>Casado(a)</option>
-          <option value={2}>Divorciado(a)</option>
-          <option value={3}>Viúvo(a)</option>
-          <option value={4}>Separado(a)</option>
+        <Form.Control
+          required
+          value={user.civil_state}
+          onChange={(e) => setUser('civil_state', parseInt(e.target.value, 10))}
+          as="select"
+          custom
+        >
+          <option value="0">Solteiro(a)</option>
+          <option value="1">Casado(a)</option>
+          <option value="2">Divorciado(a)</option>
+          <option value="3">Viúvo(a)</option>
+          <option value="4">Separado(a)</option>
         </Form.Control>
       </Form.Group>
       <Form.Label>CPF</Form.Label>
@@ -51,10 +63,22 @@ function UserForm({
       />
       <br />
       <Form.Label>Cidade</Form.Label>
-      <Form.Control required value={user.city} onChange={setUserProp('city')} type="text" placeholder="City" />
+      <Form.Control
+        required
+        value={user.city}
+        onChange={setUserProp('city')}
+        type="text"
+        placeholder="City"
+      />
       <br />
       <Form.Label>Estado</Form.Label>
-      <Form.Control required value={user.state} onChange={setUserProp('state')} type="text" placeholder="State" />
+      <Form.Control
+        required
+        value={user.state}
+        onChange={setUserProp('state')}
+        type="text"
+        placeholder="State"
+      />
       <br />
       <Form.Label>Data de nascimento</Form.Label>
       <br />
@@ -64,7 +88,7 @@ function UserForm({
         value={birthday}
         onChange={(event) => {
           setBirthday(event.target.value);
-          setUser('birthday', new Date(event.target.value).toISOString());
+          setUser('birthday', event.target.value);
         }}
       />
     </Form>
@@ -76,7 +100,7 @@ UserForm.propTypes = {
     id: PropTypes.number,
     fullname: PropTypes.string,
     birthday: PropTypes.string,
-    civil_state: PropTypes.string,
+    civil_state: PropTypes.number,
     cpf: PropTypes.string,
     city: PropTypes.string,
     state: PropTypes.string,
@@ -87,7 +111,7 @@ UserForm.propTypes = {
 };
 
 UserForm.defaultProps = {
-  user: { fullname: '' },
+  user: { fullname: '', civil_state: 0 },
 };
 
 export default UserForm;
