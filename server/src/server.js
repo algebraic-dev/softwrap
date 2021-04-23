@@ -15,6 +15,15 @@ app.use(function (req, res, next) {
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
+app.use(function (error, req, res, next) {
+  if (error instanceof SyntaxError) {
+    res.status(400).json({'error': 'bad request'}).end()
+  } else {
+    next();
+  }
+});
+
+
 app.use('/user', userRouter);
 
 app.use('*', (req, res) => {

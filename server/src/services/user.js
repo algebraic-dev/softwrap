@@ -53,11 +53,17 @@ const createUser = async (req,res) => {
 };
 
 const listUsers = async (req, res) => {
+  let count = await userModel.count({});
   let data = (await userModel.findAll({
     attributes: ['id', 'fullname', 'civil_state', 'cpf', 'city', 'state', 'age'],
     order: conn.literal('id DESC'),
+    limit: 10, 
+    offset: isNaN(req.params.page) ? 0 : parseInt(req.params.page)*10
   })).map(data => data.dataValues);
-  res.json(data).status(200).end();
+  res.json({
+    pages: Math.floor(count/10),
+    users: data
+  }).status(200).end();
 };
 
 module.exports = {

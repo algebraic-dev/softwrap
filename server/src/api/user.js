@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 router.use(bodyParser.urlencoded({ extended: true }))
 router.use(bodyParser.json())
 
-router.get('/search/:page', user.listUsers);
+router.get('/list/:page', user.listUsers);
 router.get('/:id', user.getUser);
 router.put('/:id', user.modifyUser);
 router.post('/new', user.createUser);
