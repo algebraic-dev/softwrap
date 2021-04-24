@@ -8,6 +8,14 @@ Nesse repositório há o front e back end de uma aplicação para cadastrar, edi
 ## Tecnologias usadas
 Para o front-end será utilizado React com React bootstrap, para o back-end será utilizado Express.js com Body-parser por ser simples de criar rotas e fazer parsing do json que chega na requisição http, junto com Jest para testes unitários e de integração. Para testes, o banco de dados utilizado é o Sqlite por ser simples de colocar dentro do Continuous Integration do Github e em ambiente de desenvolvimento e produção é utilizado Postgresql. Os dois bancos de dados são manipulados pela dependencia Sequelize que é um ORM que funciona para diversos bancos de dados. 
 
+- Sequelize
+- Express.js
+- Jest
+
+- React
+- React-bootstrap
+- Axios
+
 ## Features
 - Cadastrar, editar e remover usuários 
 - Paginar os usuários

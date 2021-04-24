@@ -32,8 +32,9 @@ app.use((error, _, res, next) => {
 
 app.use('/api/user', userRouter);
 
-app.use('*', (_, res) => {
+app.use('/api/*', (_, res) => {
   res.status(404).end();
 });
+
 
 module.exports = app;

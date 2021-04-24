@@ -5,10 +5,11 @@
   "private": true,
   "workspaces": ["client", "server"],
   "scripts": {
-    "build": "./build.sh", 
+    "build": "yarn --cwd client build && cp client/build -r server/src && yarn migrate:db", 
     "migrate:db": "cd server/src && npx sequelize-cli db:migrate && mv ./test.sqlite ../",
     "start:client": "yarn --cwd client run start",
     "start:server": "yarn --cwd server run start",
+    "start": "yarn --cwd server run start",
     "test:server": "cd server && yarn test"
 
   },

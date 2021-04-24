@@ -2,3 +2,4 @@ node_modules
 __tests__/coverage
 test.sqlite
 .env
+build
