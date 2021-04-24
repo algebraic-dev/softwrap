@@ -15,7 +15,7 @@ Para o front-end será utilizado React com React bootstrap, para o back-end ser�
 ## Como iniciar
 É necessário, primeiramente, instalar as dependencias de cada projeto e também ter instalado globalmente o `yarn` e o `npx`.
 ```
-$ yarn deps
+$ yarn install
 ```
 Para migrar a tabela para o banco de dados de desenvolvimento (sqlite):
 ```

@@ -26,6 +26,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: |
+        yarn install
         cd server
-        npm install
-        npm test
+        yarn test
