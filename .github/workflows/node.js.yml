@@ -18,7 +18,6 @@ jobs:
       matrix:
         node-version: [10.x, 12.x, 14.x, 15.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
@@ -30,4 +29,4 @@ jobs:
         cd server
         yarn test
     - run: |
-        yarn build 
+        NODE_ENV=production yarn --cwd client build
