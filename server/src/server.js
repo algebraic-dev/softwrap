@@ -36,5 +36,4 @@ app.use('/api/*', (_, res) => {
   res.status(404).end();
 });
 
-
 module.exports = app;
